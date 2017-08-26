@@ -13,7 +13,7 @@ public class PatientService {
     @Autowired
     private PatientRepository pr;
 
-        public List<Patient> getAllPatients()
+        public List<Patient> getAllPatients() //DONE
         {  
             List<Patient> t = new ArrayList<Patient>();
             pr.findAll()
@@ -21,7 +21,7 @@ public class PatientService {
             return t;
         }
         
-        public Patient getPatient(String id)
+        public Patient getPatient(String id) //DONE
         {
             return pr.findOne(id);
         }
@@ -31,12 +31,12 @@ public class PatientService {
         pr.save(p);
     }
 
-    void updatePatient(Patient p, String id) 
+    void updatePatient(Patient p, String id) //DONE
     {
         pr.save(p);
     }
 
-    void deletePatient(String id) 
+    void deletePatient(String id) //DONE
     {
         pr.delete(id);
     }
