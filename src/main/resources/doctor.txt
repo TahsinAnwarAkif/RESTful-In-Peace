@@ -1,0 +1,19 @@
+CREATE TABLE `mycompany`.`doctor` (
+  `d_id` VARCHAR(100) NOT NULL,
+  `d_name` VARCHAR(100) NOT NULL,
+  `isAvailable` VARCHAR(3) NOT NULL,
+  `specialty` VARCHAR(100) NOT NULL,
+  `d_address` VARCHAR(100) NOT NULL,
+  `d_phone` VARCHAR(11) NULL,
+  `d_email` VARCHAR(100) NULL,
+  PRIMARY KEY (`d_id`),
+  UNIQUE INDEX `d_id_UNIQUE` (`d_id` ASC),
+  UNIQUE INDEX `d_phone_UNIQUE` (`d_phone` ASC),
+  UNIQUE INDEX `d_email_UNIQUE` (`d_email` ASC));
+  
+insert into doctor values('01','Saad Nasim','Yes','Abdominal Radiology','Dhanmondi, Dhaka', '01710912970','saad@gmail.com');
+insert into doctor values('02','Fahim Ashraf','Yes','Pediatric Nephrology','Hatirpool, Dhaka', '01710912971','fahim@gmail.com');
+insert into doctor values('03','Ashraful Islam','Yes','Nephrology','Banani, Dhaka', '01710912972','ashraful@gmail.com');
+insert into doctor values('04','Naeem Islam','Yes','Neurology','Gulshan, Dhaka', '01710912973','naeem@gmail.com');
+insert into doctor values('05','Salimullah Saqib','Yes','Nuclear Medicine','Farmgate, Dhaka', '01710912974','saqib@gmail.com');
+

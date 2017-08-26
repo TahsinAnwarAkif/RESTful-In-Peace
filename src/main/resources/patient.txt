@@ -1,0 +1,16 @@
+CREATE TABLE `mycompany`.`patient` (
+  `p_id` VARCHAR(100) NOT NULL,
+  `p_name` VARCHAR(100) NOT NULL,
+  `p_address` VARCHAR(100) NOT NULL,
+  `p_phone` VARCHAR(11) NULL,
+  `p_email` VARCHAR(100) NULL,
+  PRIMARY KEY (`p_id`),
+  UNIQUE INDEX `p_id_UNIQUE` (`p_id` ASC),
+  UNIQUE INDEX `p_phone_UNIQUE` (`p_phone` ASC),
+  UNIQUE INDEX `p_email_UNIQUE` (`p_email` ASC));
+  
+insert into patient values('01','Sabit Hasan','Dhanmondi, Dhaka', '01720912970','sabit@gmail.com');
+insert into patient values('02','Jubayer Al Mahmud','Farmgate, Dhaka', '01730912970','rony@gmail.com');
+insert into patient values('03','Shamsul Islam','Hatirpool, Dhaka', '01740912970','islam@gmail.com');
+insert into patient values('04','Jawad Iqbal','Gulshan, Dhaka', '01756912970','jawad@gmail.com');
+insert into patient values('05','Rubel Rony','Banani, Dhaka', '01760912970','rubel@gmail.com');

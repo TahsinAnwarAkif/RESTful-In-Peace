@@ -12,7 +12,7 @@ public class Doctor {
     @Id
     private String d_id;
     private String d_name;
-    private String isAvailable;
+    private String is_available;
     private String specialty;
     private String d_address;
     private String d_phone;
@@ -26,7 +26,7 @@ public class Doctor {
     public Doctor(String d_id, String d_name, String isAvailable, String specialty, String d_address, String d_phone, String d_email) {
         this.d_id = d_id;
         this.d_name = d_name;
-        this.isAvailable = isAvailable;
+        this.is_available = isAvailable;
         this.specialty = specialty;
         this.d_address = d_address;
         this.d_phone = d_phone;
@@ -50,11 +50,11 @@ public class Doctor {
     }
 
     public String getIsAvailable() {
-        return isAvailable;
+        return is_available;
     }
 
     public void setIsAvailable(String isAvailable) {
-        this.isAvailable = isAvailable;
+        this.is_available = isAvailable;
     }
 
     public String getSpecialty() {
