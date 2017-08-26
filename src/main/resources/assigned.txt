@@ -1,6 +1,8 @@
 CREATE TABLE `mycompany`.`assigned` (
+  `a_id` VARCHAR(100) NOT NULL,
   `d_id` VARCHAR(100) NOT NULL,
   `p_id` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`a_id`),
   INDEX `d_id_idx` (`d_id` ASC),
   INDEX `p_id_idx` (`p_id` ASC),
   CONSTRAINT `d_id`
@@ -14,8 +16,9 @@ CREATE TABLE `mycompany`.`assigned` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION);
 
-insert into assigned values('01','02');
-insert into assigned values('01','03');
-insert into assigned values('02','04');
-insert into assigned values('03','04');
-insert into assigned values('04','05');
+
+insert into assigned values('1','01','02');
+insert into assigned values('2','01','03');
+insert into assigned values('3','02','04');
+insert into assigned values('4','03','04');
+insert into assigned values('5','04','05');
