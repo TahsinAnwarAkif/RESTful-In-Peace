@@ -1,6 +1,7 @@
 
 package A.patient;
 
+import A.Doctor.Doctor;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class PatientController {
         return ps.getAllPatients();
         
     }
-    
+ 
     //GET
     @RequestMapping("/patients/{id}")  //path, id = variable
     public Patient getPatient(@PathVariable String id)
@@ -49,6 +50,40 @@ public class PatientController {
     public void deletePatient(@PathVariable String id)
     {
         ps.deletePatient(id );
+    }
+    
+    //GET
+    @RequestMapping("/doctors/{id}/patients")
+    public  List<Patient> getAllPatientByDoctorID(@PathVariable String id) //DONE
+    {
+        return ps.getAllPatientByDoctorID(id); 
+    }
+    
+    //GET
+    @RequestMapping("/doctors/{doctorId}/patients/{id}")  //DONE
+    public  Patient getAPatientByDoctorID(@PathVariable String id)
+    {
+        return ps.getPatient(id); 
+    }
+    
+    @RequestMapping(method = RequestMethod.POST,value = "/doctors/{doctorId}/patients")
+    public void addPatientInDoctor(@RequestBody Patient p, @PathVariable String doctorId)  //DONE
+    {
+        p.setDoctor(new Doctor(doctorId,"","","","","",""));
+        ps.addPatient(p);
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT,value = "/doctors/{doctorId}/patients/{id}")
+    public void updatePatientInDoctor(@RequestBody Patient p, @PathVariable String doctorId,@PathVariable String id) //DONE
+    {
+        p.setDoctor(new Doctor(doctorId,"","","","","",""));
+        ps.updatePatient(p,id);
+    }
+    
+    @RequestMapping(method = RequestMethod.DELETE,value = "/doctors/{doctorId}/patients/{id}")
+    public void deletePatientInDoctor(@PathVariable String id)
+    {
+        ps.deletePatient(id);
     }
     
 }

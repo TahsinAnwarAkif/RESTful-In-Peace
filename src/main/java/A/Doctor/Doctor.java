@@ -10,13 +10,13 @@ import javax.persistence.Id;
 public class Doctor {
     
     @Id
-    private String d_id;
-    private String d_name;
+    private String id;
+    private String name;
     private String is_available;
     private String specialty;
-    private String d_address;
-    private String d_phone;
-    private String d_email;
+    private String address;
+    private String phone;
+    private String email;
 
     public Doctor()
     {
@@ -24,29 +24,29 @@ public class Doctor {
     }
 
     public Doctor(String d_id, String d_name, String isAvailable, String specialty, String d_address, String d_phone, String d_email) {
-        this.d_id = d_id;
-        this.d_name = d_name;
+        this.id = d_id;
+        this.name = d_name;
         this.is_available = isAvailable;
         this.specialty = specialty;
-        this.d_address = d_address;
-        this.d_phone = d_phone;
-        this.d_email = d_email;
+        this.address = d_address;
+        this.phone = d_phone;
+        this.email = d_email;
     }
 
-    public String getD_id() {
-        return d_id;
+    public String getId() {
+        return id;
     }
 
-    public void setD_id(String d_id) {
-        this.d_id = d_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getD_name() {
-        return d_name;
+    public String getName() {
+        return name;
     }
 
-    public void setD_name(String d_name) {
-        this.d_name = d_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIsAvailable() {
@@ -65,28 +65,28 @@ public class Doctor {
         this.specialty = specialty;
     }
 
-    public String getD_address() {
-        return d_address;
+    public String getAddress() {
+        return address;
     }
 
-    public void setD_address(String d_address) {
-        this.d_address = d_address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getD_phone() {
-        return d_phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setD_phone(String d_phone) {
-        this.d_phone = d_phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getD_email() {
-        return d_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setD_email(String d_email) {
-        this.d_email = d_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 

@@ -1,73 +1,88 @@
 
 package A.patient;
 
+import A.Doctor.Doctor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Patient {
     
     @Id
-    private String p_id;
-    private String p_name;
-    private String p_address;
-    private String p_phone;
-    private String p_email;
-
+    private String id;
+    private String name;
+    private String address;
+    private String phone;
+    private String email;
+    
+    @ManyToOne
+    private Doctor doctor;
+    
     public Patient()
     {
         
     }
 
-    public Patient(String p_id, String p_name, String p_address, String p_phone, String p_email) {
-        this.p_id = p_id;
-        this.p_name = p_name;
-        this.p_address = p_address;
-        this.p_phone = p_phone;
-        this.p_email = p_email;
+    public Patient(String p_id, String p_name, String p_address, String p_phone, String p_email, String d_id) {
+        this.id = p_id;
+        this.name = p_name;
+        this.address = p_address;
+        this.phone = p_phone;
+        this.email = p_email;
+        this.doctor = new Doctor(d_id,"","","","","","");
     }
 
-    public String getP_id() {
-        return p_id;
+    public String getId() {
+        return id;
     }
 
-    public void setP_id(String p_id) {
-        this.p_id = p_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getP_name() {
-        return p_name;
+    public String getName() {
+        return name;
     }
 
-    public void setP_name(String p_name) {
-        this.p_name = p_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getP_address() {
-        return p_address;
+    public String getAddress() {
+        return address;
     }
 
-    public void setP_address(String p_address) {
-        this.p_address = p_address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getP_phone() {
-        return p_phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setP_phone(String p_phone) {
-        this.p_phone = p_phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getP_email() {
-        return p_email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setP_email(String p_email) {
-        this.p_email = p_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+    
 
    
 

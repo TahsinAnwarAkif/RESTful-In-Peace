@@ -40,5 +40,13 @@ public class PatientService {
     {
         pr.delete(id);
     }
-        
+    
+    List<Patient> getAllPatientByDoctorID(String d_id) 
+    {
+       List<Patient> t = new ArrayList<Patient>();
+            pr.findByDoctorId(d_id)
+                    .forEach(t :: add );
+            return t;  
+    }
+      
 }

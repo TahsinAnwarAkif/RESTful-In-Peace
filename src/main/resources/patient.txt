@@ -9,8 +9,8 @@ CREATE TABLE `mycompany`.`patient` (
   UNIQUE INDEX `p_phone_UNIQUE` (`p_phone` ASC),
   UNIQUE INDEX `p_email_UNIQUE` (`p_email` ASC));
   
-insert into patient values('01','Sabit Hasan','Dhanmondi, Dhaka', '01720912970','sabit@gmail.com');
-insert into patient values('02','Jubayer Al Mahmud','Farmgate, Dhaka', '01730912970','rony@gmail.com');
-insert into patient values('03','Shamsul Islam','Hatirpool, Dhaka', '01740912970','islam@gmail.com');
-insert into patient values('04','Jawad Iqbal','Gulshan, Dhaka', '01756912970','jawad@gmail.com');
-insert into patient values('05','Rubel Rony','Banani, Dhaka', '01760912970','rubel@gmail.com');
+insert into patient values('01','Sabit Hasan','Dhanmondi, Dhaka', '01720912970','sabit@gmail.com','01');
+insert into patient values('02','Jubayer Al Mahmud','Farmgate, Dhaka', '01730912970','rony@gmail.com','01');
+insert into patient values('03','Shamsul Islam','Hatirpool, Dhaka', '01740912970','islam@gmail.com','02');
+insert into patient values('04','Jawad Iqbal','Gulshan, Dhaka', '01756912970','jawad@gmail.com','02');
+insert into patient values('05','Rubel Rony','Banani, Dhaka', '01760912970','rubel@gmail.com','03');
