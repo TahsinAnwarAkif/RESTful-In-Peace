@@ -23,4 +23,7 @@ public interface DoctorRepository extends CrudRepository<Doctor, String>
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     void delete(String id);
+    
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public Doctor findByPatientId(String patientId); 
 }

@@ -1,12 +1,18 @@
 
 package A.Doctor;
 
+import A.patient.Patient;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "doctor")
 public class Doctor {
     
     @Id
@@ -17,6 +23,9 @@ public class Doctor {
     private String address;
     private String phone;
     private String email;
+    
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private Set<Patient> patient;
 
     public Doctor()
     {
@@ -31,6 +40,7 @@ public class Doctor {
         this.address = d_address;
         this.phone = d_phone;
         this.email = d_email;
+        this.patient= null;
     }
 
     public String getId() {
@@ -88,6 +98,16 @@ public class Doctor {
     public void setEmail(String email) {
         this.email = email;
     }
+    /*
+    public Set<Patient> getPatient() {
+        return patient;
+    }
+    */
+    public void setPatient(Set<Patient> patient) {
+        this.patient = patient;
+    }
+    
+    
     
 
 }

@@ -4,6 +4,7 @@ package A.Doctor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,12 @@ public class DoctorService {
     void deleteDoctor(String id) 
     {
         dr.delete(id);
+    }
+
+    Doctor getDoctorOfPatient(String id) 
+    {
+            return dr.findByPatientId(id);
+                  
     }
         
 }

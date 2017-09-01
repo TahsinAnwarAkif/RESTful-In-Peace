@@ -1,8 +1,10 @@
 
 package A.Doctor;
 
+import A.patient.Patient;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DoctorController {
  
-   @Autowired
+    @Autowired
     private DoctorService ds;
     
     //GET
@@ -51,4 +53,10 @@ public class DoctorController {
         ds.deleteDoctor(id );
     }
     
+    @RequestMapping("/patients/{id}/doctor")  
+    public  Doctor getDoctorOfPatient(@PathVariable String id) //DONE
+    {
+        return ds.getDoctorOfPatient(id); 
+    }
+     
 }
