@@ -1,15 +1,16 @@
-CREATE TABLE `mycompany`.`doctor` (
-  `d_id` VARCHAR(100) NOT NULL,
-  `d_name` VARCHAR(100) NOT NULL,
-  `is_available` VARCHAR(3) NOT NULL,
-  `specialty` VARCHAR(100) NOT NULL,
-  `d_address` VARCHAR(100) NOT NULL,
-  `d_phone` VARCHAR(11) NULL,
-  `d_email` VARCHAR(100) NULL,
-  PRIMARY KEY (`d_id`),
-  UNIQUE INDEX `d_id_UNIQUE` (`d_id` ASC),
-  UNIQUE INDEX `d_phone_UNIQUE` (`d_phone` ASC),
-  UNIQUE INDEX `d_email_UNIQUE` (`d_email` ASC));
+CREATE TABLE `doctor` (
+   `id` varchar(100) NOT NULL,
+   `name` varchar(100) DEFAULT NULL,
+   `is_available` varchar(3) DEFAULT NULL,
+   `specialty` varchar(100) DEFAULT NULL,
+   `address` varchar(100) DEFAULT NULL,
+   `phone` varchar(11) DEFAULT NULL,
+   `email` varchar(100) DEFAULT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `d_id_UNIQUE` (`id`),
+   UNIQUE KEY `d_phone_UNIQUE` (`phone`),
+   UNIQUE KEY `d_email_UNIQUE` (`email`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8
   
 insert into doctor values('01','Saad Nasim','Yes','Abdominal Radiology','Dhanmondi, Dhaka', '01710912970','saad@gmail.com');
 insert into doctor values('02','Fahim Ashraf','Yes','Pediatric Nephrology','Hatirpool, Dhaka', '01710912971','fahim@gmail.com');

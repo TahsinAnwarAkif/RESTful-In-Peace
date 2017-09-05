@@ -1,13 +1,19 @@
-CREATE TABLE `mycompany`.`patient` (
-  `p_id` VARCHAR(100) NOT NULL,
-  `p_name` VARCHAR(100) NOT NULL,
-  `p_address` VARCHAR(100) NOT NULL,
-  `p_phone` VARCHAR(11) NULL,
-  `p_email` VARCHAR(100) NULL,
-  PRIMARY KEY (`p_id`),
-  UNIQUE INDEX `p_id_UNIQUE` (`p_id` ASC),
-  UNIQUE INDEX `p_phone_UNIQUE` (`p_phone` ASC),
-  UNIQUE INDEX `p_email_UNIQUE` (`p_email` ASC));
+
+CREATE TABLE `patient` (
+   `id` varchar(100) NOT NULL,
+   `name` varchar(100) DEFAULT NULL,
+   `address` varchar(100) DEFAULT NULL,
+   `phone` varchar(11) DEFAULT NULL,
+   `email` varchar(100) DEFAULT NULL,
+   `doctor_id` varchar(100) DEFAULT NULL,
+   UNIQUE KEY `p_phone_UNIQUE` (`phone`),
+   UNIQUE KEY `p_email_UNIQUE` (`email`),
+   KEY `id_idx` (`id`),
+   KEY `id_idx1` (`id`),
+   KEY `doctor_id_idx` (`doctor_id`),
+   CONSTRAINT `FKmer5utvy1hiff7ovs6f4bjtnw` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),
+   CONSTRAINT `doctor_id` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8
   
 insert into patient values('01','Sabit Hasan','Dhanmondi, Dhaka', '01720912970','sabit@gmail.com','01');
 insert into patient values('02','Jubayer Al Mahmud','Farmgate, Dhaka', '01730912970','rony@gmail.com','01');
