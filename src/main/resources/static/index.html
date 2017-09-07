@@ -60,6 +60,7 @@
     <th class="tg-gvwu">Address</th>
     <th class="tg-i6eq">Phone</th>
     <th class="tg-i6eq">Email</th>
+    <th class="tg-i6eq">Assigned Doctor</th>
   </tr>
 	      <tr ng-repeat="row in patients">
 	         <td><span ng-bind="row.id"></span></td>
@@ -67,6 +68,7 @@
 	         <td><span ng-bind="row.address"></span></td>
 	         <td><span ng-bind="row.phone"></span></td>
 	         <td><span ng-bind="row.email"></span></td>
+	         <td><span ng-bind="row.doctor.id"></span></td>
 		  </tr>	
 	</table>
 	
@@ -100,6 +102,10 @@
     
     <div class="form-group" >
         <input type="text" class=form-control  id="Email" ng-model="personForm.email" placeholder="Email" autocomplete="off">
+    </div>
+    
+    <div class="form-group" >
+        <input type="text" class=form-control  id="ID" ng-model="personForm.AssignedId" placeholder="Assigned to Doctor ID (Required Only For Patients)" autocomplete="off">
     </div>
 
  <div class="btn-wrapper">

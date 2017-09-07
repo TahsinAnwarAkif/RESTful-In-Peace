@@ -23,23 +23,23 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     };
     
     $scope.addDoctor = function(){											   //CREATE
-    	User = $resource(
+    	Doctors = $resource(
     		    "http://localhost:8080/doctors",
     		    {},
     		    {save: {method:'POST',isArray:false}}
     	);
     	
-    	var user = {};
+    	var newDoctor = {};
 		
-		user.id		    = $scope.personForm.id;
-		user.name 	    = $scope.personForm.name;
-		user.isAvailable= $scope.personForm.isAvailable;
-		user.specialty	= $scope.personForm.specialty;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		newDoctor.id		    = $scope.personForm.id;
+		newDoctor.name 	     = $scope.personForm.name;
+		newDoctor.isAvailable= $scope.personForm.isAvailable;
+		newDoctor.specialty	 = $scope.personForm.specialty;
+		newDoctor.address	 = $scope.personForm.address;
+		newDoctor.phone		 = $scope.personForm.phone;
+		newDoctor.email		 = $scope.personForm.email;
 		
-		User.save(user);
+		Doctors.save(newDoctor);
 				
 		$scope.personForm.id = "";
 		$scope.personForm.name="";
@@ -51,48 +51,60 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     };
     
     $scope.addPatient = function(){												//CREATE
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/patients",
     		    {},
     		    {save: {method:'POST',isArray:false}}
     	);
     	
-    	var user = {};
+    	var newPatient     = {};
+    	var assignedDoctor = {};
 		
-		user.id 	    = $scope.personForm.id;
-		user.name	    = $scope.personForm.name;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		newPatient.id 	    = $scope.personForm.id;
+		newPatient.name	    = $scope.personForm.name;
+		newPatient.address	= $scope.personForm.address;
+		newPatient.phone	= $scope.personForm.phone;
+		newPatient.email	= $scope.personForm.email;
 		
-		User.save(user);
+		
+		assignedDoctor.id         = $scope.personForm.AssignedId;
+		assignedDoctor.isAvailable= "";
+		assignedDoctor.specialty  = "";
+		assignedDoctor.address    = "";
+		assignedDoctor.phone	  = "";
+		assignedDoctor.email	  = "";
+		
+		
+		newPatient.doctor = assignedDoctor; 
+		Patients.save(newPatient);
 				
 		$scope.personForm.id = "";
 		$scope.personForm.name="";
 		$scope.personForm.address="";
 		$scope.personForm.phone="";
 		$scope.personForm.email="";
+		$scope.personForm.AssignedId =""; 
     };
     
     $scope.updateDoctor = function(){									//UPDATE
 		
-    	User = $resource(
+    	Doctors = $resource(
     		    "http://localhost:8080/doctors/:id",
     		    {},
     		    {save: {method:'PUT', params: {id: '@id'}}}
     	);
     	
-		var user = {};
+		var updatingDoctor = {};
 		
-		user.id = $scope.personForm.id;
-		user.name = $scope.personForm.name;
-		user.isAvailable= $scope.personForm.isAvailable;
-		user.specialty	= $scope.personForm.specialty;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		updatingDoctor.id 			= $scope.personForm.id;
+		updatingDoctor.name 		= $scope.personForm.name;
+		updatingDoctor.isAvailable	= $scope.personForm.isAvailable;
+		updatingDoctor.specialty	= $scope.personForm.specialty;
+		updatingDoctor.address		= $scope.personForm.address;
+		updatingDoctor.phone		= $scope.personForm.phone;
+		updatingDoctor.email		= $scope.personForm.email;
 		
-		User.save({id: $scope.personForm.id}, user);
+		Doctors.save({id: $scope.personForm.id}, updatingDoctor);
 				
 		$scope.personForm.id = "";
 		$scope.personForm.name="";
@@ -105,38 +117,48 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     
  $scope.updatePatient = function(){									//UPDATE
 		
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/patients/:id",
     		    {},
     		    {save: {method:'PUT', params: {id: '@id'}}}
     	);
     	
-		var user = {};
+		var updatingPatient = {};
+		var assignedDoctor	= {};
 		
-		user.id = $scope.personForm.id;
-		user.name = $scope.personForm.name;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		updatingPatient.id 			= $scope.personForm.id;
+		updatingPatient.name 		= $scope.personForm.name;
+		updatingPatient.address		= $scope.personForm.address;
+		updatingPatient.phone		= $scope.personForm.phone;
+		updatingPatient.email		= $scope.personForm.email;
+
+		assignedDoctor.id         = $scope.personForm.AssignedId;
+		assignedDoctor.isAvailable= "";
+		assignedDoctor.specialty  = "";
+		assignedDoctor.address    = "";
+		assignedDoctor.phone	  = "";
+		assignedDoctor.email	  = "";
 		
-		User.save({id: $scope.personForm.id}, user);
+		updatingPatient.doctor = assignedDoctor;
+		Patients.save({id: $scope.personForm.id}, updatingPatient);
 				
 		$scope.personForm.id = "";
 		$scope.personForm.name="";
 		$scope.personForm.address="";
 		$scope.personForm.phone="";
 		$scope.personForm.email="";
+		$scope.personForm.AssignedId =""; 
     };
     
     $scope.deleteDoctor = function(){								//DELETE
-    	User = $resource(
+    	Doctors = $resource(
     		    "http://localhost:8080/doctors/:id",
     		    {},
     		    {save: {method:'DELETE', params: {id: '@id'}}}
     	);
     	
 			
-		User.delete({id: $scope.personForm.id}).then(function successCallback(response) {
+		Doctors.delete({id: $scope.personForm.id}).then(function successCallback(response) {
 			$scope.Message = response;
 		}, function errorCallback(response) {
 		    
@@ -152,14 +174,14 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     };
     
     $scope.deletePatient = function(){						//DELETE
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/patients/:id",
     		    {},
     		    {save: {method:'DELETE', params: {id: '@id'}}}
     	);
     	
 			
-		User.delete({id: $scope.personForm.id}).then(function successCallback(response) {
+		Patients.delete({id: $scope.personForm.id}).then(function successCallback(response) {
 			$scope.Message = response;
 		}, function errorCallback(response) {
 		    
@@ -175,22 +197,22 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     $scope.fetchDoctorsPatients = function()					//GET
     {
     	
-    	User = $resource("http://localhost:8080/doctors/:id/patients");
+    	Patients = $resource("http://localhost:8080/doctors/:id/patients");
 
-    	$scope.patientsOfDoctor = User.query({id: $scope.personForm.doctorId},function(data){return data;});
+    	$scope.patientsOfDoctor = Patients.query({id: $scope.personForm.doctorId},function(data){return data;});
     	
     };
     
     $scope.deleteDoctorsPatient = function(){					//DELETE
     	
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/patients/:id",
     		    {},
     		    {save: {method:'DELETE', params: {id: '@id'}}}
     	);
     	
 			
-		User.delete({id: $scope.personForm.patientId}).then(function successCallback(response) {
+		Patients.delete({id: $scope.personForm.patientId}).then(function successCallback(response) {
 			$scope.Message = response;
 		}, function errorCallback(response) {
 		    
@@ -205,21 +227,21 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     };
     
     $scope.addPatientOfADoctor = function(){												//CREATE
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/doctors/:id/patients",
     		    {},
     		    {save: {method:'POST',isArray:false}}
     	);
     	
-    	var user = {};
+    	var newPatient = {};
 		
-		user.id 	    = $scope.personForm.id;
-		user.name	    = $scope.personForm.name;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		newPatient.id 	    = $scope.personForm.id;
+		newPatient.name	    = $scope.personForm.name;
+		newPatient.address	= $scope.personForm.address;
+		newPatient.phone	= $scope.personForm.phone;
+		newPatient.email	= $scope.personForm.email;
 		
-		User.save({id: $scope.personForm.doctorId}, user);
+		Patients.save({id: $scope.personForm.doctorId}, newPatient);
 				
 		$scope.personForm.id = "";
 		$scope.personForm.name="";
@@ -230,36 +252,28 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     
     $scope.updateDoctorsPatient = function(){							//UPDATE
     	
-    	User = $resource(
+    	Patients = $resource(
     		    "http://localhost:8080/doctors/:doctorId/patients/:patientId",
     		    {},
     		    {save: {method:'PUT', params: {patientId: '@id',doctorId: '@id'}}}
     	);
     	
-		var user = {};
+		var updatingPatient = {};
 		
-		user.id 	    = $scope.personForm.patientId;
-		user.name 		= $scope.personForm.name;
-		user.address	= $scope.personForm.address;
-		user.phone		= $scope.personForm.phone;
-		user.email		= $scope.personForm.email;
+		updatingPatient.id 	   	    = $scope.personForm.patientId;
+		updatingPatient.name 		= $scope.personForm.name;
+		updatingPatient.address		= $scope.personForm.address;
+		updatingPatient.phone		= $scope.personForm.phone;
+		updatingPatient.email		= $scope.personForm.email;
+		updatingPatient.doctorId    = $scope.personForm.doctorId;
 		
-		User.save({doctorId: $scope.personForm.doctorId}, user);
+		Patients.save({doctorId: $scope.personForm.doctorId}, updatingPatient);
 				
 		$scope.personForm.patientId = "";
 		$scope.personForm.name="";
 		$scope.personForm.address="";
 		$scope.personForm.phone="";
 		$scope.personForm.email="";
-    	
+		$scope.personForm.doctorId= "";
     };
-    
-    $scope.fetchPatientsDoctor = function(){
-    	
-    	User = $resource("http://localhost:8080/patients/:id/doctor");
-
-    	$scope.doctorOfPatient = User.query({id: $scope.personForm.patientId2},function(data){return data;});
-    	
-    }
-    
 }]);
