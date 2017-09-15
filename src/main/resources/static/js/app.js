@@ -206,18 +206,17 @@ app.controller('DoctorPatientController', ['$scope', '$resource',function($scope
     $scope.deleteDoctorsPatient = function(){					//DELETE
     	
     	Patients = $resource(
-    		    "http://localhost:8080/patients/:id",
+    		    "http://localhost:8080/doctors/:doctorId/patients/:patientId",
     		    {},
-    		    {save: {method:'DELETE', params: {id: '@id'}}}
+    		    {save: {method:'DELETE', params: {doctorId:'@id', patientId: '@id'}}}
     	);
-    	
-			
-		Patients.delete({id: $scope.personForm.patientId}).then(function successCallback(response) {
+		Patients.delete({ patientId: $scope.personForm.patientId }).then(function successCallback(response) {
 			$scope.Message = response;
 		}, function errorCallback(response) {
 		    
 		});
-				
+		
+                $scope.personForm.doctorId = "";		
 		$scope.personForm.patientId = "";
 		$scope.personForm.name="";
 		$scope.personForm.address="";

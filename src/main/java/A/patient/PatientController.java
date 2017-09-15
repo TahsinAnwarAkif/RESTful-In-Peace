@@ -61,9 +61,9 @@ public class PatientController {
     
     //GET
     @RequestMapping("/doctors/{doctorId}/patients/{id}")  //DONE
-    public  Patient getAPatientByDoctorID(@PathVariable String id)
+    public  Patient getAPatientByDoctorID(  @PathVariable String doctorId, @PathVariable String id)
     {
-        return ps.getPatient(id); 
+        return ps.getAPatientByDoctorID(doctorId, id); 
     }
     
     @RequestMapping(method = RequestMethod.POST,value = "/doctors/{doctorId}/patients")
@@ -81,9 +81,9 @@ public class PatientController {
     }
     
     @RequestMapping(method = RequestMethod.DELETE,value = "/doctors/{doctorId}/patients/{id}")
-    public void deletePatientInDoctor(@PathVariable String id)
+    public void deletePatientInDoctor(@PathVariable String doctorId, @PathVariable String id)
     {
-        ps.deletePatient(id);
+        ps.deletePatientInDoctor(doctorId, id);
     }
     
 }
