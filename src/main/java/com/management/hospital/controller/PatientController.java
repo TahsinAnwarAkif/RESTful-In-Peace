@@ -80,7 +80,7 @@ public class PatientController {
     public Map<String, Object> deletePatient(@PathVariable Long id)
     {
    		Map<String, Object> json = new HashMap<String, Object>();
-   		patientRepository.delete(id);
+   		patientRepository.deleteById(id);
    		
    		json.put("patientDelete", 1);
    		return json;
