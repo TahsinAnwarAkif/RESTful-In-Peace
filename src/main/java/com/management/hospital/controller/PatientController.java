@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.management.hospital.model.Patient;
+import com.management.hospital.repository.DoctorRepository;
 import com.management.hospital.repository.PatientRepository;
+import com.management.hospital.sevice.DoctorService;
 
 
 @RestController
 public class PatientController {
  
 	private PatientRepository patientRepository;
+	private DoctorRepository doctorRepository;
 	private final Logger LOGGER = LoggerFactory.getLogger(PatientController.class);
-	public PatientController(PatientRepository patientRepository) {
+	public PatientController(PatientRepository patientRepository, DoctorRepository doctorRepository, DoctorService patientService) {
 		this.patientRepository = patientRepository;
+		this.doctorRepository  = doctorRepository;
 	}
 
     @GetMapping(Mappings.SHOW_PATIENTS)
@@ -45,21 +49,25 @@ public class PatientController {
     {
     	Map<String, Object> json = new HashMap<String, Object>();
     	Patient patient = patientRepository.findOne(id);
-    	LOGGER.info("TEST DOCTOR ID WHEN SHOWING:>>>>>>>>>>>>> "+patient.getDoctor().getId());
+    	//LOGGER.info("TEST DOCTOR ID WHEN SHOWING:>>>>>>>>>>>>> "+patient.getDoctor().getId());
     	
     	json.put("patient",patient);
     	return json;
     }
 
+    @GetMapping(Mappings.GET_ADD_PATIENT_FORM)
+    public Map<String, Object> getAddPatientForm(){
+    	Map<String, Object> json = new HashMap<String, Object>();
+    	json.put("availableDoctorIds", doctorRepository.findAvailableDoctorIds());
+    	return json;
+    }
+    
     @PostMapping(Mappings.ADD_A_PATIENT)
     public Map<String, Object> addPatient(@RequestBody Patient patient)
     {
     	Map<String, Object> json = new HashMap<String, Object>();
-        
-    	LOGGER.info("TEST DOCTOR ID:>>>>>>>>>>>>> "+patient.getDoctor().getId());
-    	//patient.setDoctor(new Doctor(patient.getDoctor().getId()));
     	patientRepository.save(patient);
-        
+
         json.put("patient", patient);
         return json;
     }
@@ -80,7 +88,7 @@ public class PatientController {
     public Map<String, Object> deletePatient(@PathVariable Long id)
     {
    		Map<String, Object> json = new HashMap<String, Object>();
-   		patientRepository.deleteById(id);
+   		patientRepository.delete(id);
    		
    		json.put("patientDelete", 1);
    		return json;

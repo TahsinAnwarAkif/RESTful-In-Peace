@@ -1,17 +1,13 @@
 
 package com.management.hospital.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Patient {
@@ -27,13 +23,24 @@ public class Patient {
     private String phone;
     @Column(name="email",unique = true, nullable = false, length=255)
     private String email;
-    
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id", nullable = false, insertable=true)
-    private Doctor doctor;
 
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private Doctor doctor;
+    
+    public Patient() {
+    	
+    }
+    
+    public Patient(Patient other) {
+		this.id = other.id;
+		this.name =  other.name;
+		this.address = other. address;
+		this.phone =  other.phone;
+		this.email = other. email;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -80,4 +87,12 @@ public class Patient {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", email=" + email
+				+ ", doctor=" + doctor + "]";
+	}
+    
+    
 }

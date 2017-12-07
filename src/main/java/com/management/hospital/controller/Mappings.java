@@ -15,4 +15,5 @@ public class Mappings {
 	public static final String ADD_A_PATIENT = "/addPatient";
 	public static final String UPDATE_A_PATIENT = "/updatePatient/{id}";
 	public static final String DELETE_A_PATIENT = "/deletePatient/{id}";
+	public static final String GET_ADD_PATIENT_FORM = "/showAddPatientForm";
 }

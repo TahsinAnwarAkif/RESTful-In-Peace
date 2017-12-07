@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.management.hospital.model.Patient;
 
+
 @Transactional
 public interface PatientRepository extends CrudRepository<Patient, Long> {
 	
