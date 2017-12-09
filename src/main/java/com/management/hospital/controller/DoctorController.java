@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,26 +65,39 @@ public class DoctorController {
     }
     
     @PostMapping(Mappings.ADD_A_DOCTOR)
-    public  Map<String, Object> addDoctor(@RequestBody Doctor doctor)
+    public  Map<String, Object> addDoctor(@RequestBody Doctor doctor, BindingResult result)
     {
     	Map<String, Object> json = new HashMap<String, Object>();
-    	LOGGER.info("REQUEST BODY:>>>>>>>>>>>>>>  "+doctor);
+    	Map<String, Set<String>> errors = new HashMap<String, Set<String>>(doctorService.findErrorsInCreation(doctor, result));
+    	json.put("successs", 0);
+    	LOGGER.info("REQUEST BODY>>>>>>>>>> "+doctor);
+    	if (errors.isEmpty()) {
     	doctorRepository.save(doctor);
     	doctorService.saveDoctorsPatients(doctor);
-    	
     	json.put("doctor", doctor);
+    	json.put("success", 1);    	
+    	}
+
+    	json.put("errors", errors);
     	return json;
     }
 
     @PutMapping(Mappings.UPDATE_A_DOCTOR)
-    public  Map<String, Object> updateDoctor(@RequestBody Doctor doctor, @PathVariable Long id)
+    public  Map<String, Object> updateDoctor(@RequestBody Doctor doctor, BindingResult result, @PathVariable Long id)
     {
     	Map<String, Object> json = new HashMap<String, Object>();
+    	Map<String, Set<String>> errors = new HashMap<String, Set<String>>(doctorService.findErrorsInUpdate(doctor, result));
+    	json.put("success",0);
+    	
+    	if(errors.isEmpty()) {
     	Doctor updatedDoctor = doctorRepository.save(doctor);
     	doctorService.saveDoctorsPatients(doctor);
-    	
     	json.put("doctor", updatedDoctor);
     	json.put("doctorUpdate", 1);
+    	json.put("success", 1 );
+    	}
+    	
+    	json.put("errors", errors );
     	return json;
     }
     

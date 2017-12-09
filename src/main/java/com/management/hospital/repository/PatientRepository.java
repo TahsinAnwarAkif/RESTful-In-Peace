@@ -20,4 +20,7 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
 	@Modifying
 	@Query(value = "delete from patient where id = :patientId", nativeQuery=true)
 	void deleteById(@Param("patientId") Long patientId);
+	
+	Patient findByEmail(String email);
+	Patient findByPhone(String phone);
 }

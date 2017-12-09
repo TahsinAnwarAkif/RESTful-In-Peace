@@ -16,4 +16,7 @@ public interface DoctorRepository extends CrudRepository<Doctor, Long> {
 	@Modifying
 	@Query(value = "select id from doctor", nativeQuery=true)	
 	List<Long> findAvailableDoctorIds();
+
+	Doctor findByEmail(String email);
+	Doctor findByPhone(String phone);
 }
