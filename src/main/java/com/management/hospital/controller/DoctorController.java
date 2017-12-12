@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.management.hospital.model.Doctor;
 import com.management.hospital.model.Patient;
+import com.management.hospital.model.User;
 import com.management.hospital.repository.DoctorRepository;
+import com.management.hospital.repository.UserRepository;
 import com.management.hospital.sevice.DoctorService;
 
 @RestController
@@ -28,16 +32,18 @@ public class DoctorController {
  
 	private DoctorRepository doctorRepository;
 	private DoctorService doctorService;
+	private UserRepository userRepository;
 	private final Logger LOGGER = LoggerFactory.getLogger(DoctorController.class);
     
-	public DoctorController(DoctorRepository doctorRepository, DoctorService doctorService) {
+	public DoctorController(DoctorRepository doctorRepository, DoctorService doctorService, UserRepository userRepository) {
 		this.doctorRepository = doctorRepository;
 		this.doctorService    = doctorService;
+		this.userRepository   = userRepository;
 	}
     
     //GET
     @GetMapping(Mappings.SHOW_DOCTORS)
-    public  Map<String, Object> showAllDoctors()
+    public  Map<String, Object> showAllDoctors(HttpServletRequest request)
     {
     	Map<String, Object> json = new HashMap<String, Object>();
     	

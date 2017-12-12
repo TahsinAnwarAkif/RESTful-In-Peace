@@ -67,6 +67,14 @@ public class PatientController {
     	return json;
     }
     
+    @GetMapping(Mappings.GET_UPDATE_PATIENT_FORM)
+    public Map<String, Object> getUpdatePatientForm(@PathVariable Long id){
+    	Map<String, Object> json = new HashMap<String, Object>();
+    	json.put("patient", patientRepository.findOne(id));
+    	json.put("availableDoctorIds", doctorRepository.findAvailableDoctorIds());
+    	return json;
+    }
+    
     @PostMapping(Mappings.ADD_A_PATIENT)
     public Map<String, Object> addPatient(@RequestBody Patient patient, BindingResult result)
     {
