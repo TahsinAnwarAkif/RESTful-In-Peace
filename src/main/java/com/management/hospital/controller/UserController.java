@@ -14,18 +14,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.management.hospital.model.Role;
 import com.management.hospital.model.User;
+import com.management.hospital.repository.RoleRepository;
 import com.management.hospital.repository.UserRepository;
 
 @RestController
 public class UserController {
 
-	//private SecurityConfig securityConfig;
 	private UserRepository userRepository;
+	private RoleRepository roleRepository;
 
-	public UserController(UserRepository userRepository) {
+	public UserController(UserRepository userRepository, RoleRepository roleRepository) {
 		this.userRepository = userRepository;
-		//this.securityConfig = securityConfig;
+		this.roleRepository = roleRepository;
 	}
 
 	@GetMapping(Mappings.SHOW_USERS)
@@ -52,13 +54,22 @@ public class UserController {
 	@PostMapping(Mappings.ADD_A_USER)
 	public Map<String, Object> addUser(@RequestBody User user) throws Exception {
 		Map<String, Object> json = new HashMap<String, Object>();
+
+		if(user.getRole().getId() == Constants.ADMIN_ROLE && roleRepository.findOne(Constants.ADMIN_ROLE) == null) {
+			Role adminRole = new Role();
+			adminRole.setId(Constants.ADMIN_ROLE);
+			adminRole.setName(Constants.ADMIN);
+			roleRepository.save(adminRole);
+		}
+		
+		if(user.getRole().getId() == Constants.USER_ROLE && roleRepository.findOne(Constants.USER_ROLE) == null) {
+			Role userRole = new Role();
+			userRole.setId(Constants.USER_ROLE);
+			userRole.setName(Constants.USER);
+			roleRepository.save(userRole);
+			}
 		userRepository.save(user);
-		
-		// CALL SECURITY CONFIG FOR UPDATING CREDENTIALS
-//		securityConfig.configureGlobal(auth);
-//		securityConfig.configure(httpSecurity);
-		// END OF UPDATING CREDENTIALS
-		
+
 		json.put("user", user);
 		return json;
 	}
@@ -67,6 +78,20 @@ public class UserController {
 	public Map<String, Object> updateUser(@RequestBody User user, @PathVariable Long id) {
 		Map<String, Object> json = new HashMap<String, Object>();
 		User updatedUser = userRepository.save(user);
+		
+		if(user.getRole().getId() == Constants.ADMIN_ROLE && roleRepository.findOne(Constants.ADMIN_ROLE) == null) {
+			Role adminRole = new Role();
+			adminRole.setId(Constants.ADMIN_ROLE);
+			adminRole.setName(Constants.ADMIN);
+			roleRepository.save(adminRole);
+		}
+		
+		if(user.getRole().getId() == Constants.USER_ROLE && roleRepository.findOne(Constants.USER_ROLE) == null) {
+			Role userRole = new Role();
+			userRole.setId(Constants.USER_ROLE);
+			userRole.setName(Constants.USER);
+			roleRepository.save(userRole);
+		}
 		
 		json.put("user", updatedUser);
 		json.put("userUpdate", 1);

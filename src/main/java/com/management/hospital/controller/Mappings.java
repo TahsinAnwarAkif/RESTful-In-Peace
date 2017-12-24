@@ -27,4 +27,6 @@ public class Mappings {
 	public static final String UPDATE_A_USER = "/updateUser/{id}";
 	public static final String DELETE_A_USER = "/deleteUser/{id}";
 	//END OF USER CONTROLLER URLs
+
+	//public static final String AFTERWARDS = "/**";
 }
